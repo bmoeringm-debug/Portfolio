@@ -3,3 +3,7 @@
 !.nojekyll
 !index.html
 !Untitled-2.html
+!projects/
+!projects/*.pdf
+!projects/*.pptx
+!projects/*.xlsx
