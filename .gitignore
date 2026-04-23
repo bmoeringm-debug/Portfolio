@@ -3,6 +3,9 @@
 !.nojekyll
 !index.html
 !Untitled-2.html
+!.github/
+!.github/workflows/
+!.github/workflows/pages.yml
 !projects/
 !projects/*.pdf
 !projects/*.pptx
