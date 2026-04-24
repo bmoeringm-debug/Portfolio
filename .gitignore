@@ -6,6 +6,11 @@
 !.github/
 !.github/workflows/
 !.github/workflows/pages.yml
+!images/
+!images/projects/
+!images/projects/*.png
+!images/projects/*.jpg
+!images/projects/*.jpeg
 !projects/
 !projects/*.pdf
 !projects/*.pptx

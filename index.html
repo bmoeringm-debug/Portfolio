@@ -587,6 +587,127 @@
       display: block;
     }
 
+    .project-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .gallery-thumb {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface-soft);
+      padding: 0;
+      overflow: hidden;
+      text-align: left;
+      cursor: pointer;
+      transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    .gallery-thumb:hover {
+      transform: translateY(-1px);
+      border-color: #b8e6df;
+      box-shadow: 0 10px 24px rgba(23, 32, 42, 0.08);
+    }
+
+    .gallery-thumb img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      background: #e8edf2;
+    }
+
+    .gallery-thumb span {
+      display: block;
+      padding: 10px 12px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(23, 32, 42, 0.78);
+      backdrop-filter: blur(6px);
+    }
+
+    .lightbox.is-open {
+      display: flex;
+    }
+
+    .lightbox-dialog {
+      width: min(1000px, 100%);
+      max-height: calc(100vh - 48px);
+      border-radius: 10px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: 0 24px 60px rgba(23, 32, 42, 0.24);
+      overflow: hidden;
+    }
+
+    .lightbox-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .lightbox-title {
+      color: var(--text);
+      font-size: 0.92rem;
+      font-weight: 800;
+    }
+
+    .lightbox-close {
+      min-height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface-soft);
+      color: var(--text);
+      padding: 0 12px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .lightbox-close:hover {
+      background: #e8edf2;
+    }
+
+    .lightbox-figure {
+      padding: 16px;
+      display: grid;
+      gap: 12px;
+      justify-items: center;
+    }
+
+    .lightbox-figure img {
+      max-width: 100%;
+      max-height: calc(100vh - 180px);
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #f8fafc;
+    }
+
+    .lightbox-caption {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.65;
+      text-align: center;
+      max-width: 820px;
+    }
+
     .sidebar-section {
       padding: 22px 24px 24px;
     }
@@ -718,6 +839,10 @@
 
       .item-top {
         flex-direction: column;
+      }
+
+      .project-gallery {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -928,6 +1053,24 @@
                   <li>Developed a branded back-face treatment and pocket-like rear feature into the concept.</li>
                   <li>Used visualization-oriented CAD views to communicate the form and manufacturing intent.</li>
                 </ul>
+                <div class="project-gallery">
+                  <button class="gallery-thumb" type="button" data-lightbox-src="images/projects/phone-case-back-iso.png" data-lightbox-title="Phone case CAD view" data-lightbox-caption="Rear isometric view showing the camera surround, side button cutouts, and back storage feature.">
+                    <img src="images/projects/phone-case-back-iso.png" alt="Phone case CAD isometric view">
+                    <span>Rear isometric CAD view</span>
+                  </button>
+                  <button class="gallery-thumb" type="button" data-lightbox-src="images/projects/phone-case-back-angle.png" data-lightbox-title="Phone case rear angle" data-lightbox-caption="Angled rear view of the phone case with the branded back face and integrated pocket geometry.">
+                    <img src="images/projects/phone-case-back-angle.png" alt="Phone case CAD rear angle">
+                    <span>Rear angle view</span>
+                  </button>
+                  <button class="gallery-thumb" type="button" data-lightbox-src="images/projects/phone-case-back-front.png" data-lightbox-title="Phone case front elevation" data-lightbox-caption="Straight-on back view used to present the overall face layout and camera opening proportions.">
+                    <img src="images/projects/phone-case-back-front.png" alt="Phone case CAD front view">
+                    <span>Back face elevation</span>
+                  </button>
+                  <button class="gallery-thumb" type="button" data-lightbox-src="images/projects/phone-case-interior.png" data-lightbox-title="Phone case interior" data-lightbox-caption="Interior CAD view showing the inner cavity and support geometry for the device fit.">
+                    <img src="images/projects/phone-case-interior.png" alt="Phone case CAD interior view">
+                    <span>Interior fit view</span>
+                  </button>
+                </div>
               </div>
             </article>
 
@@ -956,6 +1099,24 @@
                   <li>Balanced precision, symmetry, and material efficiency during manual fabrication.</li>
                   <li>Used physical prototyping to understand load paths, stiffness, and construction tolerances.</li>
                 </ul>
+                <div class="project-gallery">
+                  <button class="gallery-thumb" type="button" data-lightbox-src="images/projects/tower-workshop-photo.png" data-lightbox-title="Tower prototype in workshop" data-lightbox-caption="In-progress tower prototype photographed during assembly and inspection in the shop.">
+                    <img src="images/projects/tower-workshop-photo.png" alt="Tower prototype in workshop">
+                    <span>Workshop assembly photo</span>
+                  </button>
+                  <button class="gallery-thumb" type="button" data-lightbox-src="images/projects/tower-build-team.png" data-lightbox-title="Tower build process" data-lightbox-caption="Team build session showing manual assembly, alignment, and hot-glue fabrication steps.">
+                    <img src="images/projects/tower-build-team.png" alt="Team assembling tower prototype">
+                    <span>Team build process</span>
+                  </button>
+                  <button class="gallery-thumb" type="button" data-lightbox-src="images/projects/tower-assembled.png" data-lightbox-title="Completed tower structure" data-lightbox-caption="Completed tower structure after assembly, showing the final truss pattern and vertical framing.">
+                    <img src="images/projects/tower-assembled.png" alt="Completed tower structure">
+                    <span>Completed structure</span>
+                  </button>
+                  <button class="gallery-thumb" type="button" data-lightbox-src="images/projects/tower-load-test.png" data-lightbox-title="Tower load setup" data-lightbox-caption="Tower mounted for testing with a top load fixture, demonstrating the final prototype in evaluation.">
+                    <img src="images/projects/tower-load-test.png" alt="Tower load test setup">
+                    <span>Load test setup</span>
+                  </button>
+                </div>
               </div>
             </article>
 
@@ -984,6 +1145,24 @@
                   <li>Produced a drawing package with critical dimensions, diameters, and through-hole notes.</li>
                   <li>Practiced converting a 3D concept into a format suitable for fabrication and review.</li>
                 </ul>
+                <div class="project-gallery">
+                  <button class="gallery-thumb" type="button" data-lightbox-src="images/projects/component-iso-view.png" data-lightbox-title="Component isometric CAD view" data-lightbox-caption="Isometric CAD rendering of the modeled component used for shape development and feature review.">
+                    <img src="images/projects/component-iso-view.png" alt="Component CAD isometric view">
+                    <span>Isometric model view</span>
+                  </button>
+                  <button class="gallery-thumb" type="button" data-lightbox-src="images/projects/component-front-view.png" data-lightbox-title="Component front view" data-lightbox-caption="Orthographic front view used to check symmetry, overall profile, and key proportions.">
+                    <img src="images/projects/component-front-view.png" alt="Component CAD front view">
+                    <span>Front view</span>
+                  </button>
+                  <button class="gallery-thumb" type="button" data-lightbox-src="images/projects/component-side-view.png" data-lightbox-title="Component side view" data-lightbox-caption="Side elevation showing the ribbed cylindrical feature and support-base proportions.">
+                    <img src="images/projects/component-side-view.png" alt="Component CAD side view">
+                    <span>Side view</span>
+                  </button>
+                  <button class="gallery-thumb" type="button" data-lightbox-src="images/projects/component-drawing-sheet.png" data-lightbox-title="Technical drawing sheet" data-lightbox-caption="Dimensioned engineering drawing sheet with orthographic views, hole callouts, and fabrication-ready dimensions.">
+                    <img src="images/projects/component-drawing-sheet.png" alt="Technical drawing sheet of component">
+                    <span>Drawing sheet</span>
+                  </button>
+                </div>
               </div>
             </article>
           </div>
@@ -1129,11 +1308,28 @@
       </aside>
     </section>
   </main>
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle">
+      <div class="lightbox-head">
+        <div class="lightbox-title" id="lightboxTitle">Project image</div>
+        <button class="lightbox-close" type="button" id="lightboxClose">Close</button>
+      </div>
+      <figure class="lightbox-figure">
+        <img id="lightboxImage" src="" alt="">
+        <figcaption class="lightbox-caption" id="lightboxCaption"></figcaption>
+      </figure>
+    </div>
+  </div>
   <script>
     (function () {
       const projectItems = Array.from(document.querySelectorAll(".project-item"));
       const filterButtons = Array.from(document.querySelectorAll(".filter-chip"));
       const projectCount = document.getElementById("projectCount");
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImage = document.getElementById("lightboxImage");
+      const lightboxTitle = document.getElementById("lightboxTitle");
+      const lightboxCaption = document.getElementById("lightboxCaption");
+      const lightboxClose = document.getElementById("lightboxClose");
 
       function updateCount() {
         const visibleCount = projectItems.filter((item) => !item.classList.contains("is-hidden")).length;
@@ -1175,6 +1371,49 @@
           const isOpen = card.classList.toggle("is-open");
           this.textContent = isOpen ? "Hide preview" : "Quick view";
         });
+      });
+
+      function closeLightbox() {
+        if (!lightbox) return;
+        lightbox.classList.remove("is-open");
+        lightbox.setAttribute("aria-hidden", "true");
+        if (lightboxImage) {
+          lightboxImage.src = "";
+          lightboxImage.alt = "";
+        }
+      }
+
+      document.querySelectorAll("[data-lightbox-src]").forEach((button) => {
+        button.addEventListener("click", function () {
+          if (!lightbox || !lightboxImage || !lightboxTitle || !lightboxCaption) return;
+          const src = this.getAttribute("data-lightbox-src") || "";
+          const title = this.getAttribute("data-lightbox-title") || "Project image";
+          const caption = this.getAttribute("data-lightbox-caption") || "";
+          lightboxImage.src = src;
+          lightboxImage.alt = title;
+          lightboxTitle.textContent = title;
+          lightboxCaption.textContent = caption;
+          lightbox.classList.add("is-open");
+          lightbox.setAttribute("aria-hidden", "false");
+        });
+      });
+
+      if (lightboxClose) {
+        lightboxClose.addEventListener("click", closeLightbox);
+      }
+
+      if (lightbox) {
+        lightbox.addEventListener("click", function (event) {
+          if (event.target === lightbox) {
+            closeLightbox();
+          }
+        });
+      }
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          closeLightbox();
+        }
       });
 
       updateCount();
