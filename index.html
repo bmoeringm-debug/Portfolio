@@ -328,6 +328,48 @@
       font-size: 0.95rem;
     }
 
+    .project-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 18px;
+      padding: 0 24px 18px;
+      flex-wrap: wrap;
+    }
+
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-chip {
+      min-height: 34px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface-soft);
+      color: var(--muted);
+      padding: 0 12px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+    }
+
+    .filter-chip:hover,
+    .filter-chip.is-active {
+      background: var(--accent-soft);
+      border-color: #b8e6df;
+      color: var(--accent-ink);
+    }
+
+    .project-counter {
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
     .projects-list,
     .experience-list,
     .doc-list {
@@ -345,6 +387,18 @@
     .experience-item:first-child,
     .doc-item:first-child {
       border-top: none;
+    }
+
+    .project-item {
+      transition: background 160ms ease;
+    }
+
+    .project-item:hover {
+      background: #fbfcfd;
+    }
+
+    .project-item.is-hidden {
+      display: none;
     }
 
     .item-top {
@@ -456,6 +510,81 @@
     .item-link:hover {
       background: var(--accent-soft);
       border-color: #b8e6df;
+    }
+
+    .project-more {
+      display: none;
+    }
+
+    .project-item.is-expanded .project-more {
+      display: block;
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    .toggle-button {
+      min-height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--text);
+      padding: 0 14px;
+      font-size: 0.84rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background 160ms ease, border-color 160ms ease;
+    }
+
+    .toggle-button:hover {
+      background: var(--surface-soft);
+      border-color: #c9d7e4;
+    }
+
+    .doc-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .doc-toggle {
+      min-height: 32px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface-soft);
+      color: var(--muted);
+      padding: 0 10px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .doc-toggle:hover {
+      background: var(--accent-soft);
+      color: var(--accent-ink);
+      border-color: #b8e6df;
+    }
+
+    .doc-extra {
+      display: none;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      padding: 12px 14px;
+      border-radius: 8px;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+    }
+
+    .doc-item.is-open .doc-extra {
+      display: block;
     }
 
     .sidebar-section {
@@ -578,6 +707,7 @@
       }
 
       .section-head,
+      .project-toolbar,
       .project-item,
       .experience-item,
       .doc-item,
@@ -667,8 +797,20 @@
               Project highlights across research, CAD, prototyping, and analysis, with direct links where supporting files are available.
             </p>
           </div>
+          <div class="project-toolbar">
+            <div class="filter-row" role="tablist" aria-label="Project filters">
+              <button class="filter-chip is-active" type="button" data-filter="all">All</button>
+              <button class="filter-chip" type="button" data-filter="research">Research</button>
+              <button class="filter-chip" type="button" data-filter="cad">CAD</button>
+              <button class="filter-chip" type="button" data-filter="prototype">Prototype</button>
+              <button class="filter-chip" type="button" data-filter="analysis">Analysis</button>
+            </div>
+            <div class="project-counter" aria-live="polite">
+              <span id="projectCount">6</span> projects shown
+            </div>
+          </div>
           <div class="projects-list">
-            <article class="project-item">
+            <article class="project-item" data-tags="research prototype">
               <div class="item-top">
                 <div>
                   <span class="item-tag">IMPACT UNCOVER Research</span>
@@ -684,17 +826,22 @@
                 <span class="pill">94.6% hand-force demand</span>
                 <span class="pill">Soft robotics</span>
               </div>
-              <ul class="bullet-list">
-                <li>Defined clinician strain, care consistency, and clinic-capacity constraints.</li>
-                <li>Mapped a soft robotic assistive glove and force-sensing feedback concept.</li>
-                <li>Presented stakeholders, interventions, and implementation path in the IMPACT poster.</li>
-              </ul>
-              <a class="item-link" href="projects/IMPACT-UNCOVER-Research-Poster.pptx" target="_blank" rel="noreferrer">
-                Open project file
-              </a>
+              <div class="toggle-row">
+                <button class="toggle-button" type="button" data-project-toggle>Show details</button>
+              </div>
+              <div class="project-more">
+                <ul class="bullet-list">
+                  <li>Defined clinician strain, care consistency, and clinic-capacity constraints.</li>
+                  <li>Mapped a soft robotic assistive glove and force-sensing feedback concept.</li>
+                  <li>Presented stakeholders, interventions, and implementation path in the IMPACT poster.</li>
+                </ul>
+                <a class="item-link" href="projects/IMPACT-UNCOVER-Research-Poster.pptx" target="_blank" rel="noreferrer">
+                  Open project file
+                </a>
+              </div>
             </article>
 
-            <article class="project-item">
+            <article class="project-item" data-tags="prototype cad">
               <div class="item-top">
                 <div>
                   <span class="item-tag">Final Design Project</span>
@@ -710,17 +857,22 @@
                 <span class="pill">0.1 mL/min example</span>
                 <span class="pill">+0.2 mm tolerance</span>
               </div>
-              <ul class="bullet-list">
-                <li>Modeled the carriage, syringe supports, electronics box, motor mount, and end supports.</li>
-                <li>Programmed AccelStepper flow-rate control with 1/16 microstepping and LED states.</li>
-                <li>Iterated tolerances, alignment, heat management, and syringe compatibility.</li>
-              </ul>
-              <a class="item-link" href="projects/Syringe-Pump-Final-Project.pdf" target="_blank" rel="noreferrer">
-                Open project file
-              </a>
+              <div class="toggle-row">
+                <button class="toggle-button" type="button" data-project-toggle>Show details</button>
+              </div>
+              <div class="project-more">
+                <ul class="bullet-list">
+                  <li>Modeled the carriage, syringe supports, electronics box, motor mount, and end supports.</li>
+                  <li>Programmed AccelStepper flow-rate control with 1/16 microstepping and LED states.</li>
+                  <li>Iterated tolerances, alignment, heat management, and syringe compatibility.</li>
+                </ul>
+                <a class="item-link" href="projects/Syringe-Pump-Final-Project.pdf" target="_blank" rel="noreferrer">
+                  Open project file
+                </a>
+              </div>
             </article>
 
-            <article class="project-item">
+            <article class="project-item" data-tags="analysis research">
               <div class="item-top">
                 <div>
                   <span class="item-tag">Measurement + Data Analysis</span>
@@ -736,17 +888,22 @@
                 <span class="pill">7.79 g/cm3 304 steel</span>
                 <span class="pill">Percent error</span>
               </div>
-              <ul class="bullet-list">
-                <li>Calculated rectangular, cylindrical, and irregular sample densities.</li>
-                <li>Compared measured results against accepted densities with source documentation.</li>
-                <li>Created chart-ready tables and hand-check calculations for engineering materials.</li>
-              </ul>
-              <a class="item-link" href="projects/Density-Lab-Report-Spreadsheet.xlsx" target="_blank" rel="noreferrer">
-                Open project file
-              </a>
+              <div class="toggle-row">
+                <button class="toggle-button" type="button" data-project-toggle>Show details</button>
+              </div>
+              <div class="project-more">
+                <ul class="bullet-list">
+                  <li>Calculated rectangular, cylindrical, and irregular sample densities.</li>
+                  <li>Compared measured results against accepted densities with source documentation.</li>
+                  <li>Created chart-ready tables and hand-check calculations for engineering materials.</li>
+                </ul>
+                <a class="item-link" href="projects/Density-Lab-Report-Spreadsheet.xlsx" target="_blank" rel="noreferrer">
+                  Open project file
+                </a>
+              </div>
             </article>
 
-            <article class="project-item">
+            <article class="project-item" data-tags="cad prototype">
               <div class="item-top">
                 <div>
                   <span class="item-tag">CAD Product Design</span>
@@ -762,14 +919,19 @@
                 <span class="pill">Product housing</span>
                 <span class="pill">Detail-driven modeling</span>
               </div>
-              <ul class="bullet-list">
-                <li>Modeled a slim enclosure with recessed camera geometry and edge-side button cutouts.</li>
-                <li>Developed a branded back-face treatment and pocket-like rear feature into the concept.</li>
-                <li>Used visualization-oriented CAD views to communicate the form and manufacturing intent.</li>
-              </ul>
+              <div class="toggle-row">
+                <button class="toggle-button" type="button" data-project-toggle>Show details</button>
+              </div>
+              <div class="project-more">
+                <ul class="bullet-list">
+                  <li>Modeled a slim enclosure with recessed camera geometry and edge-side button cutouts.</li>
+                  <li>Developed a branded back-face treatment and pocket-like rear feature into the concept.</li>
+                  <li>Used visualization-oriented CAD views to communicate the form and manufacturing intent.</li>
+                </ul>
+              </div>
             </article>
 
-            <article class="project-item">
+            <article class="project-item" data-tags="prototype research">
               <div class="item-top">
                 <div>
                   <span class="item-tag">Structural Build</span>
@@ -785,14 +947,19 @@
                 <span class="pill">Structural design</span>
                 <span class="pill">Prototype assembly</span>
               </div>
-              <ul class="bullet-list">
-                <li>Assembled a vertically framed tower with repeated cross-braced structural bays.</li>
-                <li>Balanced precision, symmetry, and material efficiency during manual fabrication.</li>
-                <li>Used physical prototyping to understand load paths, stiffness, and construction tolerances.</li>
-              </ul>
+              <div class="toggle-row">
+                <button class="toggle-button" type="button" data-project-toggle>Show details</button>
+              </div>
+              <div class="project-more">
+                <ul class="bullet-list">
+                  <li>Assembled a vertically framed tower with repeated cross-braced structural bays.</li>
+                  <li>Balanced precision, symmetry, and material efficiency during manual fabrication.</li>
+                  <li>Used physical prototyping to understand load paths, stiffness, and construction tolerances.</li>
+                </ul>
+              </div>
             </article>
 
-            <article class="project-item">
+            <article class="project-item" data-tags="cad analysis">
               <div class="item-top">
                 <div>
                   <span class="item-tag">Mechanical Design</span>
@@ -808,11 +975,16 @@
                 <span class="pill">Dimensioning</span>
                 <span class="pill">Machining-oriented CAD</span>
               </div>
-              <ul class="bullet-list">
-                <li>Modeled a cylindrical support component with mounting geometry and stepped features.</li>
-                <li>Produced a drawing package with critical dimensions, diameters, and through-hole notes.</li>
-                <li>Practiced converting a 3D concept into a format suitable for fabrication and review.</li>
-              </ul>
+              <div class="toggle-row">
+                <button class="toggle-button" type="button" data-project-toggle>Show details</button>
+              </div>
+              <div class="project-more">
+                <ul class="bullet-list">
+                  <li>Modeled a cylindrical support component with mounting geometry and stepped features.</li>
+                  <li>Produced a drawing package with critical dimensions, diameters, and through-hole notes.</li>
+                  <li>Practiced converting a 3D concept into a format suitable for fabrication and review.</li>
+                </ul>
+              </div>
             </article>
           </div>
         </section>
@@ -901,18 +1073,30 @@
             <h2 class="sidebar-title">Documents</h2>
             <div class="doc-list">
               <article class="doc-item">
-                <h3 class="item-title">IMPACT UNCOVER Research Poster</h3>
+                <div class="doc-header">
+                  <h3 class="item-title">IMPACT UNCOVER Research Poster</h3>
+                  <button class="doc-toggle" type="button" data-doc-toggle>Quick view</button>
+                </div>
                 <p class="item-summary">Research poster covering therapist hand strain and wearable assistance concepts.</p>
+                <div class="doc-extra">Includes the core problem space, stakeholder context, proposed intervention areas, and poster-formatted summary of the project direction.</div>
                 <a class="item-link" href="projects/IMPACT-UNCOVER-Research-Poster.pptx" target="_blank" rel="noreferrer">Open poster</a>
               </article>
               <article class="doc-item">
-                <h3 class="item-title">Syringe Pump Final Project</h3>
+                <div class="doc-header">
+                  <h3 class="item-title">Syringe Pump Final Project</h3>
+                  <button class="doc-toggle" type="button" data-doc-toggle>Quick view</button>
+                </div>
                 <p class="item-summary">Final report with design rationale, fabrication details, wiring, and code notes.</p>
+                <div class="doc-extra">Covers the CAD design, mechanism description, electronics enclosure, operating instructions, and Arduino control logic.</div>
                 <a class="item-link" href="projects/Syringe-Pump-Final-Project.pdf" target="_blank" rel="noreferrer">Open report</a>
               </article>
               <article class="doc-item">
-                <h3 class="item-title">Density Lab Report Spreadsheet</h3>
+                <div class="doc-header">
+                  <h3 class="item-title">Density Lab Report Spreadsheet</h3>
+                  <button class="doc-toggle" type="button" data-doc-toggle>Quick view</button>
+                </div>
                 <p class="item-summary">Workbook with raw data, density calculations, and accepted-versus-measured comparisons.</p>
+                <div class="doc-extra">Contains raw measurements, accepted-value comparisons, chart sheets, and hand-check calculations for multiple material types.</div>
                 <a class="item-link" href="projects/Density-Lab-Report-Spreadsheet.xlsx" target="_blank" rel="noreferrer">Open workbook</a>
               </article>
             </div>
@@ -945,5 +1129,56 @@
       </aside>
     </section>
   </main>
+  <script>
+    (function () {
+      const projectItems = Array.from(document.querySelectorAll(".project-item"));
+      const filterButtons = Array.from(document.querySelectorAll(".filter-chip"));
+      const projectCount = document.getElementById("projectCount");
+
+      function updateCount() {
+        const visibleCount = projectItems.filter((item) => !item.classList.contains("is-hidden")).length;
+        if (projectCount) {
+          projectCount.textContent = String(visibleCount);
+        }
+      }
+
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+          const filter = this.dataset.filter || "all";
+
+          filterButtons.forEach((chip) => chip.classList.remove("is-active"));
+          this.classList.add("is-active");
+
+          projectItems.forEach((item) => {
+            const tags = (item.dataset.tags || "").split(/\s+/).filter(Boolean);
+            const isVisible = filter === "all" || tags.includes(filter);
+            item.classList.toggle("is-hidden", !isVisible);
+          });
+
+          updateCount();
+        });
+      });
+
+      document.querySelectorAll("[data-project-toggle]").forEach((button) => {
+        button.addEventListener("click", function () {
+          const card = this.closest(".project-item");
+          if (!card) return;
+          const isExpanded = card.classList.toggle("is-expanded");
+          this.textContent = isExpanded ? "Hide details" : "Show details";
+        });
+      });
+
+      document.querySelectorAll("[data-doc-toggle]").forEach((button) => {
+        button.addEventListener("click", function () {
+          const card = this.closest(".doc-item");
+          if (!card) return;
+          const isOpen = card.classList.toggle("is-open");
+          this.textContent = isOpen ? "Hide preview" : "Quick view";
+        });
+      });
+
+      updateCount();
+    })();
+  </script>
 </body>
 </html>
